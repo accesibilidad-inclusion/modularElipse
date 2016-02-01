@@ -21,8 +21,11 @@ function draw() {
 }
 
 function ct(x, y, r, num, mult) {
-  var pr = 5; // point radius
+  
   var inc = TWO_PI/num;
+  var pr = map(inc, 0, PI, 2, r*.2); // point radius
+  pr = constrain(pr, 1, 40);
+
   push();
   translate(x, y);
   rotate(PI);
@@ -35,7 +38,9 @@ function ct(x, y, r, num, mult) {
   }
   
   // lines
-  stroke(0, 100);
+  var lineAlpha = map(num, 0, 600, 150, 15);
+  lineAlpha = constrain(lineAlpha, 5, 150);
+  stroke(0, lineAlpha);
   for (var i = 0; i < num; i++) {
     var result = (i * mult) % num;
     line(cos(i*inc)*r, sin(i*inc)*r, cos(result*inc)*r, sin(result*inc)*r);
