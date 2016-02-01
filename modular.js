@@ -38,8 +38,8 @@ function ct(x, y, r, num, mult) {
   }
   
   // lines
-  var lineAlpha = map(num, 0, 600, 150, 15);
-  lineAlpha = constrain(lineAlpha, 5, 150);
+  var lineAlpha = map(num, 0, 600, 150, 30);
+  lineAlpha = constrain(lineAlpha, 25, 150);
   stroke(0, lineAlpha);
   for (var i = 0; i < num; i++) {
     var result = (i * mult) % num;
