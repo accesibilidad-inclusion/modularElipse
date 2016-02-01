@@ -1,0 +1,35 @@
+/* Modular CSS */
+
+body{
+	font-family: "Helvetica Neue", Helvetica, sans-serif;
+	font-size: 20px;
+}
+
+
+#container{
+	width: 100%;
+	max-width: 800px;
+	margin: 0 auto;
+}
+
+#modular{
+	text-align: center;
+}
+
+#controls{
+	font-size: 32px;
+	text-align: center;
+}
+
+input{
+	font-size: 32px;
+	font-weight: bolder;
+	padding: .5ex 1ex;
+	text-align: center;
+	color: lightgray;
+	max-width: 5em;
+}
+
+input:focus{
+	color: #EA5B13;
+}
