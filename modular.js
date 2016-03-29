@@ -14,7 +14,7 @@ function setup() {
 }
 
 function draw() {
-  background(255);
+  background(0);
   var num = document.getElementById('num').value;
   var mult = document.getElementById('mult').value
   ct(width/2, height/2, height*.4, num, mult);
@@ -40,7 +40,7 @@ function ct(x, y, r, num, mult) {
   // lines
   var lineAlpha = map(num, 0, 600, 150, 30);
   lineAlpha = constrain(lineAlpha, 25, 150);
-  stroke(0, lineAlpha);
+  stroke(255, 220, 228, lineAlpha);
   for (var i = 0; i < num; i++) {
     var result = (i * mult) % num;
     line(cos(i*inc)*r, sin(i*inc)*r, cos(result*inc)*r, sin(result*inc)*r);
