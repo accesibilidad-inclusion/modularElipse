@@ -5,10 +5,10 @@
 }
 
 body{
-	background-color: #000;
+	background-color: #FFF;
 	font-family: "Helvetica Neue", Helvetica, sans-serif;
 	font-size: 20px;
-	color: #FFFCE4;
+	color: #333;
 }
 
 a{
@@ -36,10 +36,11 @@ input{
 	font-size: 48px;
 	font-weight: lighter;
 	text-align: center;
-	color: lightgray;
+	color: #333;
 	max-width: 5em;
-	background-color: #000;
+	background-color: #EEE;
 	border: none;
+	padding: .5ex 1ex;
 }
 
 a:hover,

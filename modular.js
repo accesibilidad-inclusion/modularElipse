@@ -19,7 +19,7 @@ function setup() {
 }
 
 function draw() {
-  background(0);
+  background(255);
   prop = mouseX/width;
   var num = document.getElementById('num').value;
   var mult = document.getElementById('mult').value;
@@ -53,7 +53,7 @@ function ct(x, y, r, num, mult) {
     var xm = lerp(x1, x2, prop);
     var ym = lerp(y1, y2, prop);
 
-    stroke(250, 222, 228, alpha);
+    stroke(10, 10, 1, alpha);
     strokeWeight(1);
     line(x1, y1, x2, y2);
 
@@ -75,7 +75,7 @@ function ct(x, y, r, num, mult) {
       propHtml.innerHTML = "&hellip;";
     }
   }
-  
+
   // draw current number
   textFont("Helvetica");
   textSize(48);
