@@ -9,21 +9,37 @@ Visualizing time tables
 var yellowDot = false; // draw the yellow dot?
 var prop, propHtml;
 
+let a, b; // xy ellipse
+let theta;
 
+let yd; 
 
 function setup() {
-  var myCanvas = createCanvas(700, 700);
+  var myCanvas = createCanvas(windowWidth, 700);
   myCanvas.parent('modular');
   ellipseMode(CENTER);
   propHtml = document.getElementById('yell');
+
+  theta = createSlider(-PI, PI, TWO_PI, 0.001);
+  a = createSlider(-width, width, width/2.4, 1);
+  b = createSlider(-height, height, height/3, 1);
+
+  theta.parent("controls");
+  a.parent("controls");
+  b.parent("controls");
+
 }
 
 function draw() {
   background(255);
-  prop = mouseX/width;
+  prop = mouseX/width ;
   var num = document.getElementById('num').value;
   var mult = document.getElementById('mult').value;
   ct(width / 2, height / 2, height * 0.44, num, mult);
+
+  textAlign(CENTER);
+  fill(0, 50);
+  text(theta.value()+"  -  "+a.value()+"  -  "+b.value(), width/2, height - 48);
 }
 
 function ct(x, y, r, num, mult) {
@@ -42,12 +58,12 @@ function ct(x, y, r, num, mult) {
     var result = (i * mult) % num;
 
     // origin
-    var x1 = cos(i * inc) * r;
-    var y1 = sin(i * inc) * r;
+    var x1 = cos(i * inc + theta.value()) * a.value();
+    var y1 = sin(i * inc + theta.value()) * b.value();
 
     // result
-    var x2 = cos(result * inc) * r;
-    var y2 = sin(result * inc) * r;
+    var x2 = cos(result * inc + theta.value()) * a.value();
+    var y2 = sin(result * inc + theta.value()) * b.value();
 
     // prop % to result
     var xm = lerp(x1, x2, prop);
@@ -67,9 +83,10 @@ function ct(x, y, r, num, mult) {
 
     // draw yellow dot
     if (yellowDot) {
-      stroke(255, 222, 0);
+      fill(0, 100); 
+      noStroke();//stroke(255, 222, 0);
       strokeWeight(3);
-      point(xm, ym);
+      ellipse(xm, ym, 7, 7);
       propHtml.innerHTML = prop.toPrecision(3);
     }else{
       propHtml.innerHTML = "&hellip;";
@@ -85,9 +102,9 @@ function ct(x, y, r, num, mult) {
   noStroke();
   fill(255, 60, 0);
   var pr = map(inc, 0, PI, 2, r * 0.2); // point radius
-  pr = constrain(pr, 1, 40);
+  pr = constrain(pr, 1, 7);
   for (var t = 0; t < TWO_PI; t += inc) {
-    ellipse(cos(t) * r, sin(t) * r, pr, pr);
+    ellipse(cos(t + theta.value()) * a.value(), sin(t + theta.value()) * b.value(), pr, pr);
   }
   pop();
 }
@@ -95,5 +112,6 @@ function ct(x, y, r, num, mult) {
 function keyPressed() {
   if (key == ' ') {
     yellowDot = !yellowDot;
+    print("yellowDot");
   }
 }
