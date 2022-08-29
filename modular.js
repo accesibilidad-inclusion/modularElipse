@@ -6,13 +6,14 @@ Visualizing time tables
 
 */
 
-var yellowDot = false; // draw the yellow dot?
+var yellowDot = true; // draw the yellow dot?
 var prop, propHtml;
 
 let a, b; // xy ellipse
 let theta;
 
 let yd; 
+let colorPicker;
 
 function setup() {
   var myCanvas = createCanvas(windowWidth, 700);
@@ -20,26 +21,36 @@ function setup() {
   ellipseMode(CENTER);
   propHtml = document.getElementById('yell');
 
-  theta = createSlider(-PI, PI, TWO_PI, 0.001);
-  a = createSlider(-width, width, width/2.4, 1);
-  b = createSlider(-height, height, height/3, 1);
+  theta = createSlider(-PI, PI, 1.3294, 0.001);
+  a = createSlider(-width, width, 400, 1);
+  b = createSlider(-height, height, 233, 1);
 
   theta.parent("controls");
   a.parent("controls");
   b.parent("controls");
 
+  yd = createCheckbox('', false);
+  yd.parent("controls");
+
+  //colorPicker = createColorPicker('#dedede');
+  //colorPicker.parent("controls");
 }
 
 function draw() {
-  background(255);
+
+  noStroke();
+  fill(255, 40);
+  rect(0, 0, width, height);
   prop = mouseX/width ;
   var num = document.getElementById('num').value;
   var mult = document.getElementById('mult').value;
   ct(width / 2, height / 2, height * 0.44, num, mult);
 
   textAlign(CENTER);
-  fill(0, 50);
-  text(theta.value()+"  -  "+a.value()+"  -  "+b.value(), width/2, height - 48);
+  textFont("Open Sans", 12);
+  noStroke();
+  fill(23, 19, 19, 40);
+  text(theta.value().toPrecision(4)+"  -  "+a.value()+"  -  "+b.value(), width/2, height - 48);
 }
 
 function ct(x, y, r, num, mult) {
@@ -51,8 +62,8 @@ function ct(x, y, r, num, mult) {
   var currentNumber = 0;
 
   // lines
-  var alpha = map(num, 0, 600, 110, 30); // alpha of the line
-  alpha = constrain(alpha, 25, 150);
+  //var alpha = map(num, 0, 600, 110, 30); // alpha of the line
+  //alpha = constrain(alpha, 25, 150);
 
   for (var i = 0; i < num; i++) {
     var result = (i * mult) % num;
@@ -69,7 +80,7 @@ function ct(x, y, r, num, mult) {
     var xm = lerp(x1, x2, prop);
     var ym = lerp(y1, y2, prop);
 
-    stroke(10, 10, 1, alpha);
+    stroke(0, 10);//10, 10, 1, alpha);
     strokeWeight(1);
     line(x1, y1, x2, y2);
 
@@ -82,15 +93,13 @@ function ct(x, y, r, num, mult) {
     }
 
     // draw yellow dot
-    if (yellowDot) {
-      fill(0, 100); 
+    if (yd.checked()) {
+      fill("#dedede"); 
       noStroke();//stroke(255, 222, 0);
       strokeWeight(3);
       ellipse(xm, ym, 7, 7);
-      propHtml.innerHTML = prop.toPrecision(3);
-    }else{
-      propHtml.innerHTML = "&hellip;";
     }
+
   }
 
   // draw current number
