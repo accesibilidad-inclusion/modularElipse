@@ -13,17 +13,15 @@ let a, b; // xy ellipse
 let theta;
 
 let yd; 
-let colorPicker;
 
 function setup() {
-  var myCanvas = createCanvas(windowWidth, 700);
+  var myCanvas = createCanvas(windowWidth, 450);
   myCanvas.parent('modular');
   ellipseMode(CENTER);
-  propHtml = document.getElementById('yell');
 
   theta = createSlider(-PI, PI, 1.3294, 0.001);
   a = createSlider(-width, width, 400, 1);
-  b = createSlider(-height, height, 233, 1);
+  b = createSlider(-height, height, 200, 1);
 
   theta.parent("controls");
   a.parent("controls");
@@ -32,8 +30,7 @@ function setup() {
   yd = createCheckbox('', false);
   yd.parent("controls");
 
-  //colorPicker = createColorPicker('#dedede');
-  //colorPicker.parent("controls");
+  
 }
 
 function draw() {
@@ -46,11 +43,10 @@ function draw() {
   var mult = document.getElementById('mult').value;
   ct(width / 2, height / 2, height * 0.44, num, mult);
 
-  textAlign(CENTER);
-  textFont("Open Sans", 12);
+
   noStroke();
-  fill(23, 19, 19, 40);
-  text(theta.value().toPrecision(4)+"  -  "+a.value()+"  -  "+b.value(), width/2, height - 48);
+  fill(23, 19, 19, 10);
+  text(theta.value().toPrecision(4)+"  -  "+a.value()+"  -  "+b.value(), 10, height - 48);
 }
 
 function ct(x, y, r, num, mult) {
@@ -94,10 +90,10 @@ function ct(x, y, r, num, mult) {
 
     // draw yellow dot
     if (yd.checked()) {
-      fill("#dedede"); 
+      fill(255, 60, 0);
       noStroke();//stroke(255, 222, 0);
       strokeWeight(3);
-      ellipse(xm, ym, 7, 7);
+      ellipse(xm, ym, 2, 2);
     }
 
   }
